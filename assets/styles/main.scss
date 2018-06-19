@@ -1,0 +1,26 @@
+@import '../../node_modules/bootstrap/scss/bootstrap-reboot.scss';
+@import '../../node_modules/bootstrap/scss/bootstrap-grid.scss';
+
+
+@import './constants.scss';
+
+@font-face {
+  font-family: 'Olivier';
+  src: url("../fonts/olivier.woff2") format("woff2");
+}
+
+/**
+ * The styles written here are just to get you started.
+ * Feel free to modify them at your convenience and make things look awesome :)
+ */
+
+body {
+    background-color: white;
+    font-family: $default-font;
+    color: $text-color;
+}
+
+h1 {
+    font-family: $brand-font;
+    color: $brand-color;
+}

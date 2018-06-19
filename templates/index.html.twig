@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <img src="{{ asset('images/brand-logo.svg') }}" />
+    <h1>VegOresto</h1>
+    <div>
+        <form action="/" method="GET">
+            <input type="text" name="q" value="{{ q }}" placeholder="Chercher un restaurant…" />
+            <button type="submit">Chercher</button>
+        </form>
+    </div>
+    <ul>
+    {% for restaurant in restaurants %}
+        <li>
+            <h3>{{ restaurant.getTitle() }}</h3>
+            <p>{{ restaurant.getDescription() }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
