@@ -23,15 +23,15 @@ class ImportRestaurantsController extends Controller
 
     private function importRestaurant($d)
     {
-        $id = $d['objectID'];
+        $id = (int)$d['objectID'];
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
-        if ($restaurant) {
-            // already imported, skip
-            return false;
+
+        if (!$restaurant) {
+            // create a Restaurant object
+            $restaurant = new Restaurant();
+            $restaurant->setId($id);
         }
 
-        // create a Restaurant object
-        $restaurant = new Restaurant();
         $restaurant->setCreatedAt(new \DateTime('now'));
         $restaurant->setTitle($d['title']);
         $restaurant->setDescription($d['description']);
@@ -40,6 +40,7 @@ class ImportRestaurantsController extends Controller
         $restaurant->setAddress($d['address']['address']);
         $restaurant->setRatings($d['ratings']['avg'] ?: 0);
         $restaurant->setCategories($d['culinary_categories']);
+        $restaurant->setImageUrl(empty($d['images']['gallery']) ? $d['images']['cover'] : $d['images']['gallery'][0]);
 
         // persist
         $em = $this->getDoctrine()->getManager();
